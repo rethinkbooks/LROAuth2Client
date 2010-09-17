@@ -6,10 +6,10 @@
 //  Copyright 2010 LJR Software Limited. All rights reserved.
 //
 
+#import <YAJLIOS/NSObject+YAJL.h>
 #import "LROAuth2Client.h"
 #import "ASIHTTPRequest.h"
 #import "NSURL+QueryInspector.h"
-#import "NSObject+YAJL.h"
 #import "LROAuth2AccessToken.h"
 #import "NSDictionary+QueryString.h"
 
@@ -225,7 +225,12 @@
  */
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
+  
+#if __IPHONE_OS_VERSION_MAX_ALLOWED <= __IPHONE_3_2
   NSString *failingURLString = [error.userInfo objectForKey:NSErrorFailingURLStringKey];
+#else
+  NSString *failingURLString = [error.userInfo objectForKey:NSURLErrorFailingURLStringErrorKey];
+#endif
   
   if ([failingURLString hasPrefix:[self.redirectURL absoluteString]]) {
     [webView stopLoading];
