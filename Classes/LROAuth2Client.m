@@ -6,12 +6,12 @@
 //  Copyright 2010 LJR Software Limited. All rights reserved.
 //
 
-#import <YAJLIOS/NSObject+YAJL.h>
 #import "LROAuth2Client.h"
 #import "ASIHTTPRequest.h"
 #import "NSURL+QueryInspector.h"
 #import "LROAuth2AccessToken.h"
 #import "NSDictionary+QueryString.h"
+#import "JSON.h"
 
 #pragma mark -
 
@@ -157,11 +157,12 @@
   if( [request isResponseCompressed]) {
     data = [ASIHTTPRequest uncompressZippedData:rawData];
   }
-    
-  NSError *parseError = nil;
-  NSDictionary *authorizationData = [data yajl_JSON:&parseError];
+
+  NSData* dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+  NSDictionary *authorizationData = [data JSONValue];
+  [dataString release];
   
-  if (parseError) {
+  if (!authorizationData) {
     // try and decode the response body as a query string instead
     NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     authorizationData = [NSDictionary dictionaryWithFormEncodedString:responseString];

@@ -1,3 +1,6 @@
 [submodule "Vendor/ASIHTTPRequest"]
 	path = Vendor/ASIHTTPRequest
 	url = http://github.com/pokeb/asi-http-request.git
+[submodule "Vendor/JSON"]
+	path = Vendor/JSON
+	url = http://github.com/stig/json-framework.git
