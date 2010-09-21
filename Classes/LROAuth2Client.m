@@ -158,8 +158,8 @@
     data = [ASIHTTPRequest uncompressZippedData:rawData];
   }
 
-  NSData* dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  NSDictionary *authorizationData = [data JSONValue];
+  NSString* dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+  NSDictionary *authorizationData = [dataString JSONValue];
   [dataString release];
   
   if (!authorizationData) {
