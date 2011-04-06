@@ -154,8 +154,8 @@
 - (void)request:(ASIHTTPRequest *)request didReceiveData:(NSData *)rawData
 {
   NSData* data = rawData;
-  if( [request isResponseCompressed]) {
-    data = [ASIHTTPRequest uncompressZippedData:rawData];
+  if ([request isResponseCompressed]) {
+    data = [ASIDataDecompressor uncompressData:rawData error:nil];
   }
 
   NSString* dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ASIDataDecompressor.h"
 #import "ASIHTTPRequestDelegate.h"
 #import "LROAuth2ClientDelegate.h"
 
