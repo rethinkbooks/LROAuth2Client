@@ -11,7 +11,7 @@
 #import "NSURL+QueryInspector.h"
 #import "LROAuth2AccessToken.h"
 #import "NSDictionary+QueryString.h"
-#import "JSON.h"
+#import "SBJson.h"
 
 #pragma mark -
 
