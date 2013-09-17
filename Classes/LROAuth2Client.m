@@ -11,7 +11,6 @@
 #import "NSURL+QueryInspector.h"
 #import "LROAuth2AccessToken.h"
 #import "NSDictionary+QueryString.h"
-#import "SBJson.h"
 
 #pragma mark -
 
@@ -159,9 +158,11 @@
   }
 
   NSString* dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  NSDictionary *authorizationData = [dataString JSONValue];
+  NSDictionary *authorizationData = [NSJSONSerialization JSONObjectWithData:[dataString dataUsingEncoding:NSUTF8StringEncoding]
+                                                                    options:0
+                                                                      error:NULL];
   [dataString release];
-  
+
   if (!authorizationData) {
     // try and decode the response body as a query string instead
     NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
